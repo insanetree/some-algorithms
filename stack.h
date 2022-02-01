@@ -12,10 +12,10 @@ typedef struct stack_element
 typedef struct stack
 {
 	struct stack_element* head;
-	int capacity;
+	unsigned capacity;
 }stack;
 
-
+stack* init_stack();
 void push(stack*, void*);
 
 #endif //_STACK_H_
