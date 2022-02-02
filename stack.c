@@ -13,6 +13,7 @@ void push(stack* param_stack, void* param_data)
 	struct stack_element* new_element = malloc(sizeof(struct stack_element));
 	new_element->data = param_data;
 	new_element->next = param_stack->head;
+	param_stack->head = new_element;
 	param_stack->capacity++;
 }
 
