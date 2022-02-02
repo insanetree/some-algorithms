@@ -15,3 +15,21 @@ void push(stack* param_stack, void* param_data)
 	new_element->next = param_stack->head;
 	param_stack->capacity++;
 }
+
+void* top(stack* param_stack)
+{
+	return param_stack->head->data;
+}
+
+void pop(stack* param_stack)
+{
+	if(param_stack->capacity > 0)
+	{
+		struct stack_element* tmp = param_stack->head;
+		param_stack->head = param_stack->head->next;
+		free(tmp);
+		param_stack->capacity--;
+	}
+}
+
+

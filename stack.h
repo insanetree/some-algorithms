@@ -17,5 +17,8 @@ typedef struct stack
 
 stack* init_stack();
 void push(stack*, void*);
+void* top(stack*);
+void pop(stack*);
+void delete_stack(stack*);
 
 #endif //_STACK_H_
