@@ -33,4 +33,14 @@ void pop(stack* param_stack)
 	}
 }
 
-
+void stack_delete(stack* param_stack)
+{
+	struct stack_element* current;
+	while(param_stack->capacity > 0)
+	{
+		current = param_stack->head;
+		param_stack->head = param_stack->head->next;
+		free(current);
+		param_stack->capacity--;
+	}
+}

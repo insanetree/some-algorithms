@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-typedef struct stack_element
+struct stack_element
 {
 	void* data;
 	struct stack_element* next;
@@ -19,6 +19,6 @@ stack* init_stack();
 void push(stack*, void*);
 void* top(stack*);
 void pop(stack*);
-void delete_stack(stack*);
+void stack_delete(stack*);
 
 #endif //_STACK_H_
