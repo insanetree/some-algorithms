@@ -28,7 +28,7 @@ void quick_sort(void* arr, unsigned cnt, size_t size, int(*cmp)(void*, void*))
 		if(low < mid-size)
 		{
 			push(bound, low);
-			push(bound, mid - size);
+			push(bound, mid-size);
 		}
 		if(mid+size < high)
 		{
@@ -36,4 +36,5 @@ void quick_sort(void* arr, unsigned cnt, size_t size, int(*cmp)(void*, void*))
 			push(bound, high);
 		}
 	}
+	stack_delete(bound);
 }
