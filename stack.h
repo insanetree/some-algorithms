@@ -1,8 +1,6 @@
 #ifndef _STACK_H_
 #define _STACK_H_
 
-#include <stdlib.h>
-
 struct stack_element
 {
 	void* data;
@@ -15,7 +13,7 @@ typedef struct stack
 	unsigned capacity;
 }stack;
 
-stack* init_stack();
+stack* stack_init();
 void push(stack*, void*);
 void* top(stack*);
 void pop(stack*);
