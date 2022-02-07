@@ -1,11 +1,48 @@
 #include "sorting.h"
 #include "stack.h"
+#include <stdlib.h>
+#include <string.h>
+
+
+void* get_pivot(void* low, void* high, size_t size)
+{
+	unsigned long long n = (high-low)/size + 1; //get the number of elements in between
+	unsigned long long i = rand() % n; //get random number form 0 to n-1
+	return low + i*size;
+}
 
 void* qs_partition(void* low, void* high, size_t size, int(*cmp)(void*, void*))
 {
-	void* piv = NULL;
-	//TODO
-	return piv;
+	void* piv = get_pivot(low, high, size);
+	void* i = low;
+	void* j = high;
+	void* tmp = malloc(size);
+	while(i < j)
+	{
+		while(i < j && cmp(i, piv) <= 0)
+		{
+			i = i+size;
+		}
+		while(cmp(j, piv) > 0)
+		{
+			j = j-size;
+		}
+		if(i < j)
+		{
+			memcpy(tmp, i, size);
+			memcpy(i, j, size);
+			memcpy(j, tmp, size);
+			if(j == piv)
+			{
+				piv = i;
+			}
+		}
+	}
+	memcpy(tmp, piv, size);
+	memcpy(piv, j, size);
+	memcpy(j, tmp, size);
+	free(tmp);
+	return j;
 }
 
 void quick_sort(void* arr, unsigned cnt, size_t size, int(*cmp)(void*, void*))
