@@ -11,12 +11,11 @@ void* get_pivot(void* low, void* high, size_t size)
 	return low + i*size;
 }
 
-void* qs_partition(void* low, void* high, size_t size, int(*cmp)(void*, void*))
+void* qs_partition(void* low, void* high, size_t size, int(*cmp)(void*, void*), void* tmp)
 {
 	void* piv = get_pivot(low, high, size);
 	void* i = low;
 	void* j = high;
-	void* tmp = malloc(size);
 	while(i < j)
 	{
 		while(i < j && cmp(i, piv) <= 0)
@@ -41,7 +40,6 @@ void* qs_partition(void* low, void* high, size_t size, int(*cmp)(void*, void*))
 	memcpy(tmp, piv, size);
 	memcpy(piv, j, size);
 	memcpy(j, tmp, size);
-	free(tmp);
 	return j;
 }
 
@@ -53,6 +51,7 @@ void quick_sort(void* arr, unsigned cnt, size_t size, int(*cmp)(void*, void*))
 	stack* bound = stack_init();
 	push(bound, low); //addres of an element copied to stack
 	push(bound, high);
+	void* tmp = malloc(size);
 	
 	//PUSH LOW, THEN HIGH
 	while(bound->capacity != 0)
@@ -61,7 +60,7 @@ void quick_sort(void* arr, unsigned cnt, size_t size, int(*cmp)(void*, void*))
 		pop(bound);
 		low = top(bound);
 		pop(bound);
-		mid = qs_partition(low, high, size, cmp);
+		mid = qs_partition(low, high, size, cmp, tmp);
 		if(low < mid-size)
 		{
 			push(bound, low);
@@ -73,5 +72,6 @@ void quick_sort(void* arr, unsigned cnt, size_t size, int(*cmp)(void*, void*))
 			push(bound, high);
 		}
 	}
+	free(tmp);
 	stack_delete(bound);
 }
